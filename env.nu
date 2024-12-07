@@ -100,16 +100,52 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
+if ((sys host).name == 'Darwin') {
+    $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/bin' | append '/System/Cryptexes/App/usr/bin' | append 'var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin' | append '/Library/Apple/usr/bin' | append '/usr/local/share/dotnet' | append '~/.dotnet/tools' | append '/Library/Frameworks/Mono.framework/Versions/Current/Commands')
+
+    # Setup Homebrew
+    if ('/opt/homebrew' | path exists) {
+        $env.PATH = ($env.PATH | split row (char esep) | append '/opt/homebrew/bin' | append '/opt/homebrew/sbin')
+
+        $env.HOMEBREW_PREFIX = '/opt/homebrew'
+        $env.HOMEBREW_CELLAR = '/opt/homebrew/Cellar'
+        $env.HOMEBREW_REPOSITORY = '/opt/homebrew'
+        $env.MANPATH = ['/opt/homebrew/share/man'] # MANPATH doesn't exist yet. Just set it.
+        $env.INFOPATH = ['/opt/homebrew/share/info'] # INFOPATH doesn't exist yet. Just set it.
+
+        if ('/opt/homebrew/opt/ruby/bin' | path exists) {
+            $env.PATH = ($env.PATH | split row (char esep) | append '/opt/homebrew/opt/ruby/bin')
+        }
+    }
+
+    if (which opam | is-not-empty) {
+        # $TODO: Parse opam env.
+
+        #let opam_env = opam env | str trim | lines
+        #print $opam_env
+        #print ($opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird)
+
+        #$opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
+    }
+
+# Windows
+} else {
+    if (which opam | is-not-empty) {
+        let opam_env = opam env | str trim | str replace -a "set \"" "" | str replace -a "set " "" | str replace -a "\"" "" | lines
+        $opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
+    }
+}
+
+if ('~/Qt' | path exists) {
+    # $TODO: At some point, remove the hardcoded version and dynamically determine version.
+    $env.PATH = ($env.PATH | split row (char esep) | append '~/Qt/6.7.2/macos/bin')
+}
+
 if ('~/go' | path exists) {
-    $env.PATH = $env.PATH | prepend '~/go/bin'
+    $env.PATH = ($env.PATH | split row (char esep) | append '~/go/bin')
     $env.GOBIN = '~/go/bin'
 }
 
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save -f ($nu.default-config-dir | path join zoxide.nu)
-}
-
-if (which opam | is-not-empty) {
-    let opam_env = opam env | str trim | str replace -a "set \"" "" | str replace -a "set " "" | str replace -a "\"" "" | lines
-    $opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
 }

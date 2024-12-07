@@ -800,8 +800,5 @@ source ($nu.default-config-dir | path join nu_scripts/custom-completions/git/git
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/eza/eza-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/rg/rg-completions.nu)
 
-if (not ($nu.default-config-dir | path join zoxide.nu | path exists)) {
-    return
-}
-
-source ($nu.default-config-dir | path join zoxide.nu)
+# zoxide
+source (if (($nu.default-config-dir | path join zoxide.nu | path exists)) { ($nu.default-config-dir | path join zoxide.nu) } else { ($nu.default-config-dir | path join empty.nu) })
