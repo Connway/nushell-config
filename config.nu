@@ -787,13 +787,21 @@ $env.config = {
     ]
 }
 
+source ($nu.default-config-dir | path join nu_scripts/custom-menus/extra/commands_with_description.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-menus/fuzzy/directory.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-menus/fuzzy/history.nu)
+#source ($nu.default-config-dir | path join nu_scripts/custom-menus/current_session_history_menu.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-menus/zoxide-menu.nu)
 
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/rustup/rustup-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/cargo/cargo-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/scoop/scoop-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/git/git-completions.nu)
+source ($nu.default-config-dir | path join nu_scripts/custom-completions/eza/eza-completions.nu)
+source ($nu.default-config-dir | path join nu_scripts/custom-completions/rg/rg-completions.nu)
+
+if (not ($nu.default-config-dir | path join zoxide.nu | path exists)) {
+    return
+}
 
 source ($nu.default-config-dir | path join zoxide.nu)

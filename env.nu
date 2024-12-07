@@ -85,10 +85,6 @@ $env.ENV_CONVERSIONS = {
     }
 }
 
-$env.PATH = $env.PATH | prepend '~/go/bin'
-
-$env.GOBIN = '~/go/bin'
-
 # Directories to search for scripts when calling source or use
 # The default for this is $nu.default-config-dir/scripts
 $env.NU_LIB_DIRS = [
@@ -104,7 +100,16 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
-zoxide init nushell | save -f ($nu.default-config-dir | path join zoxide.nu)
+if ('~/go' | path exists) {
+    $env.PATH = $env.PATH | prepend '~/go/bin'
+    $env.GOBIN = '~/go/bin'
+}
 
-let opam_env = opam env | str trim | str replace -a "set \"" "" | str replace -a "set " "" | str replace -a "\"" "" | lines
-$opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
+if (which zoxide | is-not-empty) {
+    zoxide init nushell | save -f ($nu.default-config-dir | path join zoxide.nu)
+}
+
+if (which opam | is-not-empty) {
+    let opam_env = opam env | str trim | str replace -a "set \"" "" | str replace -a "set " "" | str replace -a "\"" "" | lines
+    $opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
+}
