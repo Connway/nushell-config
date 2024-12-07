@@ -796,6 +796,7 @@ source ($nu.default-config-dir | path join nu_scripts/custom-menus/zoxide-menu.n
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/rustup/rustup-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/cargo/cargo-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/scoop/scoop-completions.nu)
+source ($nu.default-config-dir | path join nu_scripts/custom-completions/make/make-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/git/git-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/eza/eza-completions.nu)
 source ($nu.default-config-dir | path join nu_scripts/custom-completions/rg/rg-completions.nu)
