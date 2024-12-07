@@ -803,3 +803,9 @@ source ($nu.default-config-dir | path join nu_scripts/custom-completions/rg/rg-c
 
 # zoxide
 source (if (($nu.default-config-dir | path join zoxide.nu | path exists)) { ($nu.default-config-dir | path join zoxide.nu) } else { ($nu.default-config-dir | path join empty.nu) })
+
+# yazi
+source ($nu.default-config-dir | path join yazi.nu)
+
+# which command is not allowed during parse time. Currently no way to conditionally source this, but should be fine as long as you don't run 'y' if you don't have yazi installed.
+#source (if (which yazi | is-not-empty) { ($nu.default-config-dir | path join yazi.nu) } else { ($nu.default-config-dir | path join empty.nu) })
