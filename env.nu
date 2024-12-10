@@ -143,7 +143,7 @@ if ('~/Qt' | path exists) {
 
 if ('~/go' | path exists) {
     $env.PATH = ($env.PATH | split row (char esep) | append '~/go/bin')
-    $env.GOBIN = '~/go/bin'
+    $env.GOBIN = ('~/go/bin' | path expand)
 }
 
 if (which zoxide | is-not-empty) {
