@@ -120,6 +120,10 @@ if ((sys host).name == 'Darwin') {
         if ('/opt/homebrew/opt/git/bin' | path exists) {
             $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/git/bin')
         }
+
+        if ('/opt/homebrew/opt/gpatch/bin' | path exists) {
+            $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/gpatch/bin')
+        }
     }
 
     if (which opam | is-not-empty) {
