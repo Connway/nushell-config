@@ -114,7 +114,11 @@ if ((sys host).name == 'Darwin') {
         $env.INFOPATH = ['/opt/homebrew/share/info'] # INFOPATH doesn't exist yet. Just set it.
 
         if ('/opt/homebrew/opt/ruby/bin' | path exists) {
-            $env.PATH = ($env.PATH | split row (char esep) | append '/opt/homebrew/opt/ruby/bin')
+            $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/ruby/bin')
+        }
+
+        if ('/opt/homebrew/opt/git/bin' | path exists) {
+            $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/git/bin')
         }
     }
 
