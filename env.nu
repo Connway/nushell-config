@@ -115,6 +115,8 @@ if ((sys host).name == 'Darwin') {
 
         if ('/opt/homebrew/opt/ruby/bin' | path exists) {
             $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/ruby/bin')
+            # $TDOO: Remove the hardcoded version and dynamically determine it.
+            $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/lib/ruby/gems/3.4.0/bin')
         }
 
         if ('/opt/homebrew/opt/git/bin' | path exists) {
