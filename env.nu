@@ -126,6 +126,23 @@ if ((sys host).name == 'Darwin') {
         if ('/opt/homebrew/opt/gpatch/bin' | path exists) {
             $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/opt/gpatch/bin')
         }
+
+        # $TDOO: Remove the hardcoded version and dynamically determine it.
+        if ('~/VulkanSDK/1.3.296.0' | path exists) {
+            $env.VULKAN_SDK = ('~/VulkanSDK/1.3.296.0/macOS' | path expand)
+            $env.VK_SDK_PATH = $env.VULKAN_SDK
+            $env.VK_ICD_FILENAMES = ($env.VULKAN_SDK | path join 'share/vulkan/icd.d/MoltenVK_icd.json')
+            $env.VK_LAYER_PATH = ($env.VULKAN_SDK | path join 'share/vulkan/explicit_layer.d')
+
+            #$env.DYLD_LIBRARY_PATH = [($env.VULKAN_SDK | path join 'lib')]
+            $env.PATH = ($env.PATH | split row (char esep) | prepend 'bin')
+
+            if (($env | find DYLD_LIBRARY_PATH) | is-empty) {
+                $env.DYLD_LIBRARY_PATH = []
+            }
+
+            $env.DYLD_LIBRARY_PATH = ($env.DYLD_LIBRARY_PATH | split row (char esep) | prepend ($env.VULKAN_SDK | path join 'lib'))
+        }
     }
 
     if (which opam | is-not-empty) {
