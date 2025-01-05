@@ -144,6 +144,8 @@ if ((sys host).name == 'Darwin') {
         $env.VK_SDK_PATH = $env.VULKAN_SDK
         $env.VK_ICD_FILENAMES = ($env.VULKAN_SDK | path join 'share/vulkan/icd.d/MoltenVK_icd.json')
         $env.VK_LAYER_PATH = ($env.VULKAN_SDK | path join 'share/vulkan/explicit_layer.d')
+        $env.VK_ADD_LAYER_PATH = $env.VK_LAYER_PATH
+        $env.VK_DRIVER_FILES = $env.VK_ICD_FILENAMES
 
         #$env.DYLD_LIBRARY_PATH = [($env.VULKAN_SDK | path join 'lib')]
         $env.PATH = ($env.PATH | split row (char esep) | prepend 'bin')
