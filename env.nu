@@ -141,14 +141,8 @@ if ((sys host).name == 'Darwin') {
     # $TDOO: Remove the hardcoded version and dynamically determine it.
     if ('~/VulkanSDK/1.3.296.0' | path exists) {
         $env.VULKAN_SDK = ('~/VulkanSDK/1.3.296.0/macOS' | path expand)
-        $env.VK_SDK_PATH = $env.VULKAN_SDK
-        $env.VK_ICD_FILENAMES = ($env.VULKAN_SDK | path join 'share/vulkan/icd.d/MoltenVK_icd.json')
-        $env.VK_LAYER_PATH = ($env.VULKAN_SDK | path join 'share/vulkan/explicit_layer.d')
-        $env.VK_ADD_LAYER_PATH = $env.VK_LAYER_PATH
-        $env.VK_DRIVER_FILES = $env.VK_ICD_FILENAMES
 
-        #$env.DYLD_LIBRARY_PATH = [($env.VULKAN_SDK | path join 'lib')]
-        $env.PATH = ($env.PATH | split row (char esep) | prepend 'bin')
+        $env.PATH = ($env.PATH | split row (char esep) | prepend ($env.VULKAN_SDK | path join 'bin'))
 
         if (($env | find DYLD_LIBRARY_PATH) | is-empty) {
             $env.DYLD_LIBRARY_PATH = []
@@ -163,6 +157,17 @@ if ((sys host).name == 'Darwin') {
         let opam_env = opam env | str trim | str replace -a "set \"" "" | str replace -a "set " "" | str replace -a "\"" "" | lines
         $opam_env | each { |a| $a | split column "=" var export } | flatten | transpose -ird | load-env
     }
+}
+
+if (($env | find VULKAN_SDK) | is-not-empty) {
+    if (($env | find VK_SDK_PATH) | is-empty) {
+        $env.VK_SDK_PATH = $env.VULKAN_SDK
+    }
+
+    $env.VK_ICD_FILENAMES = ($env.VULKAN_SDK | path join 'share/vulkan/icd.d/MoltenVK_icd.json')
+    $env.VK_LAYER_PATH = ($env.VULKAN_SDK | path join 'share/vulkan/explicit_layer.d')
+    $env.VK_ADD_LAYER_PATH = $env.VK_LAYER_PATH
+    $env.VK_DRIVER_FILES = $env.VK_ICD_FILENAMES
 }
 
 if ('~/Qt' | path exists) {
