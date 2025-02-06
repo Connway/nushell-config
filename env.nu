@@ -144,7 +144,7 @@ if ((sys host).name == 'Darwin') {
 
         $env.PATH = ($env.PATH | split row (char esep) | prepend ($env.VULKAN_SDK | path join 'bin'))
 
-        if (($env | find DYLD_LIBRARY_PATH) | is-empty) {
+        if (($env | get --ignore-errors DYLD_LIBRARY_PATH) | is-empty) {
             $env.DYLD_LIBRARY_PATH = []
         }
 
