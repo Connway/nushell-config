@@ -159,8 +159,8 @@ if ((sys host).name == 'Darwin') {
     }
 }
 
-if (($env | find VULKAN_SDK) | is-not-empty) {
-    if (($env | find VK_SDK_PATH) | is-empty) {
+if (($env | get --ignore-errors VULKAN_SDK) | is-not-empty) {
+    if (($env | get --ignore-errors VK_SDK_PATH) | is-empty) {
         $env.VK_SDK_PATH = $env.VULKAN_SDK
     }
 
