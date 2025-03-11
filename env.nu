@@ -101,7 +101,7 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 if ((sys host).name == 'Darwin') {
-    $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/bin' | append '/System/Cryptexes/App/usr/bin' | append 'var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin' | append '/Library/Apple/usr/bin' | append '/usr/local/share/dotnet' | append '~/.dotnet/tools' | append '/Library/Frameworks/Mono.framework/Versions/Current/Commands')
+    $env.PATH = ($env.PATH | split row (char esep) | append '/usr/local/bin' | append '/System/Cryptexes/App/usr/bin' | append 'var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin' | append '/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin' | append '/Library/Apple/usr/bin' | append '/usr/local/share/dotnet' | append '~/.dotnet/tools' | append '/Library/Frameworks/Mono.framework/Versions/Current/Commands' | append '/Library/TeX/texbin')
 
     # Setup Homebrew
     if ('/opt/homebrew' | path exists) {
