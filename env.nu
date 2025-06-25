@@ -180,6 +180,14 @@ if ('~/go' | path exists) {
     $env.GOBIN = ('~/go/bin' | path expand)
 }
 
+if ('~/.config/composer' | path exists) {
+    $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/composer/vendor/bin')
+}
+
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save -f ($nu.default-config-dir | path join zoxide.nu)
+}
+
+if (which atuin | is-not-empty) {
+    atuin init nu | save -f ($nu.default-config-dir | path join atuin.nu)
 }

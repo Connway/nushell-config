@@ -804,6 +804,8 @@ source ($nu.default-config-dir | path join nu_scripts/custom-completions/rg/rg-c
 # zoxide
 source (if (($nu.default-config-dir | path join zoxide.nu | path exists)) { ($nu.default-config-dir | path join zoxide.nu) } else { ($nu.default-config-dir | path join empty.nu) })
 
+source (if (($nu.default-config-dir | path join atuin.nu | path exists)) { ($nu.default-config-dir | path join atuin.nu) } else { ($nu.default-config-dir | path join empty.nu) })
+
 source ($nu.default-config-dir | path join yazi.nu)
 source ($nu.default-config-dir | path join eza.nu)
 
