@@ -144,7 +144,7 @@ if ((sys host).name == 'Darwin') {
 
         $env.PATH = ($env.PATH | split row (char esep) | prepend ($env.VULKAN_SDK | path join 'bin'))
 
-        if (($env | get --ignore-errors DYLD_LIBRARY_PATH) | is-empty) {
+        if (($env | get --optional DYLD_LIBRARY_PATH) | is-empty) {
             $env.DYLD_LIBRARY_PATH = []
         }
 
@@ -159,8 +159,8 @@ if ((sys host).name == 'Darwin') {
     }
 }
 
-if (($env | get --ignore-errors VULKAN_SDK) | is-not-empty) {
-    if (($env | get --ignore-errors VK_SDK_PATH) | is-empty) {
+if (($env | get --optional VULKAN_SDK) | is-not-empty) {
+    if (($env | get --optional VK_SDK_PATH) | is-empty) {
         $env.VK_SDK_PATH = $env.VULKAN_SDK
     }
 
