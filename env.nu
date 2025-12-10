@@ -105,7 +105,7 @@ if ((sys host).name == 'Darwin') {
 
     # Setup Homebrew
     if ('/opt/homebrew' | path exists) {
-        $env.PATH = ($env.PATH | split row (char esep) | append '/opt/homebrew/bin' | append '/opt/homebrew/sbin')
+        $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin' | prepend '/opt/homebrew/sbin')
 
         $env.HOMEBREW_PREFIX = '/opt/homebrew'
         $env.HOMEBREW_CELLAR = '/opt/homebrew/Cellar'
