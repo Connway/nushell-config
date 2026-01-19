@@ -3,7 +3,7 @@
 # version = "0.89.0"
 
 def create_left_prompt [] {
-    let home =  $nu.home-path
+    let home =  $nu.home-dir
 
     # Perform tilde substitution on dir
     # To determine if the prefix of the path matches the home dir, we split the current path into
@@ -190,4 +190,8 @@ if (which zoxide | is-not-empty) {
 
 if (which atuin | is-not-empty) {
     atuin init nu | save -f ($nu.default-config-dir | path join atuin.nu)
+}
+
+if (which tv | is-not-empty) {
+    tv init nu | save -f ($nu.default-config-dir | path join tv.nu)
 }

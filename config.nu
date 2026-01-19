@@ -806,6 +806,8 @@ source (if (($nu.default-config-dir | path join zoxide.nu | path exists)) { ($nu
 
 source (if (($nu.default-config-dir | path join atuin.nu | path exists)) { ($nu.default-config-dir | path join atuin.nu) } else { ($nu.default-config-dir | path join empty.nu) })
 
+source (if (($nu.default-config-dir | path join tv.nu | path exists)) { ($nu.default-config-dir | path join tv.nu) } else { ($nu.default-config-dir | path join empty.nu) })
+
 source ($nu.default-config-dir | path join yazi.nu)
 source ($nu.default-config-dir | path join eza.nu)
 
