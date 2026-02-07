@@ -195,3 +195,7 @@ if (which atuin | is-not-empty) {
 if (which tv | is-not-empty) {
     tv init nu | save -f ($nu.default-config-dir | path join tv.nu)
 }
+
+if (which jj | is-not-empty) {
+    jj util completion nushell | save -f ($nu.default-config-dir | path join completions-jj.nu)
+}
