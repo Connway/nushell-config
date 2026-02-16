@@ -139,8 +139,8 @@ if ((sys host).name == 'Darwin') {
     }
 
     # $TDOO: Remove the hardcoded version and dynamically determine it.
-    if ('~/VulkanSDK/1.3.296.0' | path exists) {
-        $env.VULKAN_SDK = ('~/VulkanSDK/1.3.296.0/macOS' | path expand)
+    if ('~/VulkanSDK/1.4.341.0' | path exists) {
+        $env.VULKAN_SDK = ('~/VulkanSDK/1.4.341.0/macOS' | path expand)
 
         $env.PATH = ($env.PATH | split row (char esep) | prepend ($env.VULKAN_SDK | path join 'bin'))
 
