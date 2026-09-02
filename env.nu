@@ -188,9 +188,13 @@ if ('~/.local/bin' | path exists) {
     $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/bin')
 }
 
-if ('~/.rubies/truffleruby-34.0.1/bin' | path exists) {
-    $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.rubies/truffleruby-34.0.1/bin')
+if ('~/.rubies/ruby-4.0.6/bin' | path exists) {
+    $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.rubies/ruby-4.0.6/bin')
 }
+
+# if ('~/.rubies/truffleruby-34.0.1/bin' | path exists) {
+#     $env.PATH = ($env.PATH | split row (char esep) | prepend '~/.rubies/truffleruby-34.0.1/bin')
+# }
 
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save -f ($nu.default-config-dir | path join zoxide.nu)
